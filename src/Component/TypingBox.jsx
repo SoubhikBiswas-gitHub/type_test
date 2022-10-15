@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useRef, useMemo, useState } from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 
 function TypingBox({ words }) {
   //variable
@@ -29,22 +29,15 @@ function TypingBox({ words }) {
     console.log(wordSpanRef[currentWordIndex].current.querySelectorAll("span")[currentCharecterIndex])
 
     // //space click -> next word
-    // if (e.keyCode === 32) {
-    //   console.log(currentWordIndex);
-    //   setCurrentWordIndex(currentWordIndex + 1);
-    //   setCurrentCharecterIndex(0);
-    //   console.log(currentWordIndex);
-    //   return;
-    // }
-
-     //space click -> next word
-     if (e.key == 'Space') {
+    if (e.keyCode === 32) {
       console.log(currentWordIndex);
       setCurrentWordIndex(currentWordIndex + 1);
       setCurrentCharecterIndex(0);
       console.log(currentWordIndex);
       return;
     }
+
+     
 
     // backspace -> delete charecter but limited to same charecter
     // if (e.keyCode === 8) {

@@ -46,20 +46,29 @@ body{
 display:flex;
 flex-direction:row;
 flex-wrap:wrap;
-justify-content:space-between;
+justify-content:flex-start;
 width:fit-content;
 
 }
 
 .word{
     /* border:1px solid red; */
-    padding:1px 2px;
-    margin:1px 1px;
+    // padding:1px 2px;
+    // margin:1px 1px;
     
 }
 
 .Charecter{
     margin:1px .5px;
+}
+
+.correctChar{
+    color:green;
+}
+
+
+.incorrectChar{
+    color:red;
 }
 
 `

@@ -53,8 +53,8 @@ width:fit-content;
 
 .word{
     /* border:1px solid red; */
-    // padding:1px 2px;
-    // margin:1px 1px;
+    padding:1px 2px;
+    margin:1px 1px;
     
 }
 

@@ -40,16 +40,16 @@ function TypingBox({ words }) {
      
 
     // backspace -> delete charecter but limited to same charecter
-    // if (e.keyCode === 8) {
-    //   if (currentCharecterIndex !== 0) {
-    //     wordSpanRef[currentWordIndex].current.querySelectorAll("span")[
-    //       currentCharecterIndex - 1
-    //     ].className = "char";
-    //     console.log("backspace");
-    //     setCurrentCharecterIndex(currentCharecterIndex - 1);
-    //   }
-    //   return;
-    // }
+    if (e.keyCode === 8) {
+      if (currentCharecterIndex !== 0) {
+        wordSpanRef[currentWordIndex].current.querySelectorAll("span")[
+          currentCharecterIndex - 1
+        ].className = "char";
+        console.log("backspace");
+        setCurrentCharecterIndex(currentCharecterIndex - 1);
+      }
+      return;
+    }
 
     if (key === currentCharecter) {
       wordSpanRef[currentWordIndex].current.querySelectorAll("span")[

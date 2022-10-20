@@ -20,26 +20,30 @@ body{
     transition: all 0.3s linear;
 }
 
-.canvas{
-    display:grid;
-    justify-items:center;
-    gap:0.5rem;
-    grid-auto-flow: row;
-    grid-template-rows : auto 1fr auto;
-    min-height:100vh;
-    padding:1rem;
-    margin-left:auto;
-    margin-right:auto;
-} 
+// .canvas{
+//     display:grid;
+//     justify-items:center;
+//     gap:0.5rem;
+//     grid-auto-flow: row;
+//     grid-template-rows : auto 1fr auto;
+//     min-height:100vh;
+//     padding:1rem;
+//     margin-left:auto;
+//     margin-right:auto;
+// } 
+
+.mainbox{
+   
+}
 
 .type-box{
-    max-width:70%;
+    max-width:90%;
     height:fit-content;
     display:block;
     overflow:hidden;
     margin: auto 5px;
     text-align:justify;
-
+    // border: 10px groove red;
 }
 
 .words{
@@ -53,13 +57,16 @@ width:fit-content;
 
 .word{
     /* border:1px solid red; */
-    // padding:1px 2px;
+    padding:1px 2px;
     margin:1px 1px;
     
 }
 
 .Charecter{
-    margin:1px .5px;
+    // margin:1px .5px;
+    color:#111;
+    font-size:1.5rem;
+    font-weight:500;
 }
 
 .correctChar{
@@ -71,5 +78,32 @@ width:fit-content;
     color:red;
 }
 
-`
+.currentCharLeftCursor{
+    border-left: 1px solid;
+    animation: borderLeft 2s infinite;
+    animation-timing-function: ease;
 
+
+    @keyframes borderLeft { 
+        0%{border-left-color: #111}
+        25%{border-left-color: #fff}
+        50%{border-left-color: #111}
+        75%{border-left-color: #fff}
+        100%{border-left-color: #111}
+    }
+}
+.currentCharRightCursor{
+    border-right: 1px solid #111;
+    animation: borderRight 2s infinite;
+    animation-timing-function: ease;
+
+   @keyframes borderRight { 
+        0%{border-right-color: #111}
+        25%{border-right-color: #fff}
+        50%{border-right-color: #111}
+        75%{border-right-color: #fff}
+        100%{border-right-color: #111}
+    }
+}
+
+`;

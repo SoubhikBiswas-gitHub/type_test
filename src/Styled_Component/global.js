@@ -37,13 +37,32 @@ body{
 }
 
 .type-box{
-    max-width:90%;
+    min-width:100%;
     height:fit-content;
     display:block;
     overflow:hidden;
     margin: auto 5px;
     text-align:justify;
     // border: 10px groove red;
+}
+.stats-box{
+   min-width:100%;
+    height:fit-content;
+    display:block;
+    overflow:hidden;
+    margin: auto 5px;
+    text-align:justify; 
+     border:2px solid blue;
+}
+
+.result-box{
+     min-width:90%;
+    height:fit-content;
+    display:block;
+    overflow:hidden;
+    margin: auto 5px;
+    text-align:justify;
+   
 }
 
 .words{
@@ -104,6 +123,22 @@ width:fit-content;
         75%{border-right-color: #fff}
         100%{border-right-color: #111}
     }
+}
+
+.timmer-menu{
+    display:flex;
+    justify-content: space-around;
+    align-items:   center;
+   ;
+}
+
+.time{
+     margin:10px
+}
+
+.time:hover{
+    cursor:pointer;
+    color:green;
 }
 
 `;

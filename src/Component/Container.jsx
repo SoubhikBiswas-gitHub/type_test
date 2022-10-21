@@ -3,11 +3,10 @@ import {Paper,CssBaseline,Container} from "@mui/material";
 import TypingBox from "./TypingBox";
 import Header from "./Header";
 import { GlobalStyle } from "../Styled_Component/global";
-// import TypingBoxTest from "./TypingBoxTest";
-var randomWords = require("random-words");
+// var randomWords = require("random-words");
 
 function SimpleContainer() {
-  const words = randomWords(50);
+  // const words = randomWords(50);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -18,8 +17,8 @@ function SimpleContainer() {
           <Paper elevation={3}>
 
           </Paper>
-          {/* <TypingBoxTest words={words}/> */}
-          <TypingBox words={words} />
+          {/* <TypingBox words={words} /> */}
+          <TypingBox  />
         </Paper>
       </Container>
     </React.Fragment>

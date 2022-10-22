@@ -3,6 +3,8 @@ import {Paper,CssBaseline,Container} from "@mui/material";
 import TypingBox from "./TypingBox";
 import Header from "./Header";
 import { GlobalStyle } from "../Styled_Component/global";
+import Footer from "./Footer";
+import SignUpForm from "./SignUpForm";
 // var randomWords = require("random-words");
 
 function SimpleContainer() {
@@ -19,7 +21,10 @@ function SimpleContainer() {
           </Paper>
           {/* <TypingBox words={words} /> */}
           <TypingBox  />
+          <SignUpForm/>
+          {/* <Footer/> */}
         </Paper>
+
       </Container>
     </React.Fragment>
   );

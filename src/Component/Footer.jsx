@@ -1,59 +1,40 @@
-import * as React from "react";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import FolderIcon from "@mui/icons-material/Folder";
-import RestoreIcon from "@mui/icons-material/Restore";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { MenuItem, Select } from "@mui/material";
-import { themeOptions } from "../Styled_Component/theme";
+import React from "react";
+import { BottomNavigation, BottomNavigationAction, Box } from "@mui/material";
+import Select from "react-select";
 import { useTheme } from "../Context/ThemeContext";
+import { themeOptions } from "../Styled_Component/theme";
 
 function Footer() {
-  const [value, setValue] = React.useState("recents");
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const { setTheme, theme, defaultTheme } = useTheme();
+  const handleThemeChange = (e) => {
+    setTheme(e.value);
   };
-const {setTheme}=useTheme
-const handelThemeChange=(e)=>{
-setTheme(e.target.value);
-// 
-}
 
+  
 
   return (
-    <BottomNavigation
-      sx={{ width: "100%", backgroundColor: "orange" }}
-      value={value}
-      onChange={handleChange}
-    >
-      {/* <BottomNavigationAction
-        label="Recents"
-        value="recents"
-        icon={<RestoreIcon />}
-      /> */}
-      {/* <BottomNavigationAction
-        label="Favorites"
-        value="favorites"
-        icon={<FavoriteIcon />}
-      />
-      <BottomNavigationAction
-        label="Nearby"
-        value="nearby"
-        icon={<LocationOnIcon />}
-      /> */}
-      {/* <BottomNavigationAction
-        label="Themes"
-        value="folder"
-        icon={<FolderIcon />}
-      ></BottomNavigationAction> */}
-      <Select options={themeOptions} value={[1]} label="Options" onChange={handelThemeChange}>
-        {themeOptions.map((op) => (
-          <MenuItem value={op.value}>{op.label}</MenuItem>
-        ))}
-      </Select>
-    </BottomNavigation>
+    <Box sx={{ display:"grid", 
+    gridTemplateColumns: "1fr 8fr 1fr", 
+    width: "100%", hight:"6rem", 
+    backgroundColor: "orange",
+    boxShadow:"  0px 3px 5px 0px rgba(51, 50, 50, 0.7)"
+     }}>
+      <div className="link"></div>
+      <div className="note"></div>
+      <div className="theme"><Select
+ styles={{width:"100px"}}
+    value="theme"
+    options={themeOptions}
+    menuPlacement='top'
+    onChange={handleThemeChange}
+    // defaultValue={{label:defaultTheme.label,value:defaultTheme}}
+    // styles={{
+        // control: (styles) => ({...styles,backgroundColor:theme.background, cursor:'pointer', borderColor:theme.title}),
+        // singleValue: (styles) => ({...styles, color:theme.title}),
+        // menu: styles => ({...styles,backgroundColor:theme.background})
+    // }}
+/></div>
+    </Box>
   );
 }
-
 export default Footer;

@@ -9,36 +9,24 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body{
-    background:#AEBDCA;
-    display: flex;
-    align-items:center;
-    flex-direction:column;
-    justify-content:center;
-    height:100%;
-    width: 100%;
-    /* color:#111; */
+    padding:0;
+    margin: 0;
     transition: all 0.3s linear;
 }
 
-// .canvas{
-//     display:grid;
-//     justify-items:center;
-//     gap:0.5rem;
-//     grid-auto-flow: row;
-//     grid-template-rows : auto 1fr auto;
-//     min-height:100vh;
-//     padding:1rem;
-//     margin-left:auto;
-//     margin-right:auto;
-// } 
-
-.mainbox{
-   
-}
+.canvas{
+    display:grid;
+    justify-items:center;
+    gap:0.5rem;
+    grid-auto-flow: row;
+    grid-template-rows : 1fr ;
+    // height:100vh;
+    transition: all 0.3s linear;
+} 
 
 .type-box{
     min-width:100%;
-    height:fit-content;
+    max-height:80%;
     display:block;
     overflow:hidden;
     margin: auto 5px;
@@ -71,7 +59,7 @@ flex-direction:row;
 flex-wrap:wrap;
 justify-content:flex-start;
 width:fit-content;
-
+line-height:1.8rem
 }
 
 .word{
@@ -82,7 +70,7 @@ width:fit-content;
 }
 
 .Charecter{
-    // margin:1px .5px;
+    margin:1px .5px;
     color:#111;
     font-size:1.5rem;
     font-weight:500;
@@ -132,13 +120,32 @@ width:fit-content;
    ;
 }
 
+.timer{
+padding:.5rem;
+border : 5px solid orange;
+border-radius:10px;
+color:orange;
+}
+
+.timer:hover{
+background-color:orange;
+color:white;
+}
+
 .time{
-     margin:10px
+     margin:.5rem;
+     padding:0 .5rem;
+     font-size:1.3rem;
+     border: 2px solid green;
+     border-radius:10px;
+color : green;
 }
 
 .time:hover{
     cursor:pointer;
-    color:green;
+    color:white;
+    background-color:green;
+
 }
 
 `;

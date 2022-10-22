@@ -11,9 +11,9 @@ const upadateTime=(e)=>{
 }
 
   return (
-    <div style={{width:"90%"}}>
+    <div style={{width:"100%",padding:"10px 0" }}>
         <Paper sx={{width:"100%",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-          <h2>{countDown} s</h2>
+          <h2 className="timer">{countDown} s</h2>
           <div className="timmer-menu">
             <div className="time" id={15} onClick={(e)=>upadateTime(e)}>15s</div>
             <div className="time"id={30} onClick={(e)=>upadateTime(e)} >30s</div>

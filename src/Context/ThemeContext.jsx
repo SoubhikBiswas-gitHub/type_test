@@ -1,26 +1,26 @@
-// import { createContext, useContext, useState } from "react";
-// // import { themeOptions } from "../styles/theme";
+import { createContext, useContext, useState } from "react";
+// import { themeOptions } from "../Styled_Component/theme";
 
 
-// const ThemeContext =createContext();
+ const ThemeContext =createContext();
 
-// export const ThemeContextProvider = ({children})=>{
-//     // console.log(themeOptions);
-//     // const defaultTheme = JSON.parse(localStorage.getItem('theme')) || themeOptions[3].value;
-//     // const [theme, setTheme] = useState(defaultTheme);
-//     const [theme, setTheme] = useState({
-//             background:"white",
-//             color:"balck"
-//     });
-//     // console.log(defaultTheme);
-//     const values = {
-//         theme,
-//         setTheme,
-//         // defaultTheme
-//     }
+export const ThemeContextProvider = ({children})=>{
+   
+    const [theme, setTheme] = useState({
+        background:"green",
+        color:"white"
+    });
+    const values = {
+        theme,
+        setTheme,
+    }
 
-//     return (<ThemeContext.Provider value = {values}>{children}</ThemeContext.Provider>);
+    return (<ThemeContext.Provider value = {values}>{children}</ThemeContext.Provider>);
 
-// }
+}
 
-// export const useTheme = ()=> useContext(ThemeContext);
+export const useTheme = ()=> useContext(ThemeContext);
+
+
+
+

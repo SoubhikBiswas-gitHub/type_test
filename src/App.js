@@ -1,20 +1,21 @@
-import { ThemeProvider } from "@mui/material";
-import { useEffect } from "react";
 import "./App.css";
-import Container from "./Component/Container";
-import { firebaseApp } from "./firebaseConfig";
-// import { useTheme } from "./Context/ThemeContext";
+import ContainerOuter from "./Component/ContainerOuter";
+import { ThemeProvider } from "styled-components";
+import { useState } from "react";
+import { ThemeContextProvider } from "./Context/ThemeContext";
+
+
 
 function App() {
-  // const { theme } = useTheme;
-
 
   return (
-    // <ThemeProvider> </ThemeProvider>
+    // <ThemeProvider theme={theme}>
+      <ThemeContextProvider>
       <div className="canvas">
-        <Container />
+        <ContainerOuter />
       </div>
-   
+      </ThemeContextProvider>
+      // </ThemeProvider>
   );
 }
 

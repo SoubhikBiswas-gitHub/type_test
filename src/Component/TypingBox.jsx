@@ -275,9 +275,10 @@ function TypingBox() {
           justifyContent: "center",
           flexDirection: "column",
           alignItems: "center",
-          width: "90%",
-          margin: "30px",
-          padding: "10px",
+          width: "80%",
+          margin: "10px auto",
+          padding: "10px 20px",
+          
         }}
       >
         <Uppermenu countDown={countDown} />

@@ -9,3 +9,11 @@
     //   }
     //   return;
     // }
+
+
+
+    {signUpModal && 
+        //  <Modal onClose={onModalClose}>
+        //  <SignUpForm /> 
+        //  </Modal>
+           // }   

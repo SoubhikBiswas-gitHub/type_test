@@ -26,7 +26,7 @@ function TypingBox() {
   // const[words,setWords] = useState([]);
   const [intervalId, setIntervalId] = useState(null);
   const [wordsArray, setwordsArray] = useState(() => {
-    return randomWords(50);
+    return randomWords(45);
   });
 
   const words = useMemo(() => {
@@ -59,7 +59,7 @@ function TypingBox() {
     setMissedChar(0);
     setGraphData([]);
     // words=randomWords(50);
-    let random = randomWords(50);
+    let random = randomWords(45);
     setwordsArray(random);
     clearInterval(intervalId);
     focusInput();

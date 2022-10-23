@@ -1,11 +1,16 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField,Modal } from "@mui/material";
 import React, { useState } from "react";
 import {auth} from '../firebaseConfig'
 
-function SignUpForm() {
+function SignUpForm({open,onModalClose,sx}) {
     const[email,setEmail] =useState("");
     const[password,setPassword] =useState("");
     const[confirmPassword,setConfirmPassword] =useState("");
+
+
+   
+
+    
 
     const handleSubmit =()=>{
         if( !email || !password || !confirmPassword){
@@ -77,6 +82,12 @@ function SignUpForm() {
     }
 
   return (
+    <Modal
+        open={open}
+        onClose={onModalClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
     <Box
       p={3}
       style={{
@@ -85,6 +96,7 @@ function SignUpForm() {
         flexDirection: "column",
         gap: "20px",
       }}
+      sx={sx}
     >
       <TextField
         variant="outlined"
@@ -144,6 +156,7 @@ function SignUpForm() {
         Sign Up
       </Button>
     </Box>
+    </Modal>
   );
 }
 

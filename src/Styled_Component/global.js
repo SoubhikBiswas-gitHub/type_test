@@ -14,13 +14,21 @@ body{
     transition: all 0.3s linear;
 }
 
+body {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+body::-webkit-scrollbar { 
+    display: none;  
+}
+
 .canvas{
     display:grid;
     justify-items:center;
     gap:0.5rem;
     grid-auto-flow: row;
     grid-template-rows : 1fr ;
-    // height:100vh;
+    height:100vh;
     transition: all 0.3s linear;
 } 
 

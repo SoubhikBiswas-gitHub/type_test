@@ -22,7 +22,11 @@ function ContainerOuter() {
   // },[])
 
   // const theme =React.useContext(ThemeContext)
-  console.log(theme);
+
+
+  
+
+  // console.log(theme);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -49,7 +53,7 @@ function ContainerOuter() {
          
           <Header />
           <Routes>
-            <Route path="/" exact element={<Homepage/>}/>
+            <Route path="/" exact element={<Homepage />}/>
             <Route path="/user" element={<Userpage/>}/>
           </Routes>
           

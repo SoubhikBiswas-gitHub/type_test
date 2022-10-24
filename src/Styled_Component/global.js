@@ -156,4 +156,23 @@ color : green;
 
 }
 
+.kdb{
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid gray;
+    background-color:gray;
+    color:white;
+    font-size:.8rem;
+    font-weight:700;
+    boxShadow:"  0px 1px 10px 0px rgba(51, 50, 50, 0.5)"
+}
+
+b{
+color:white;
+    font-size:1rem;
+    font-weight:700;
+    text-decoration : underline;
+    // text-decoration: overline;
+}
+
 `;

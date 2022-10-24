@@ -16,4 +16,14 @@
         //  <Modal onClose={onModalClose}>
         //  <SignUpForm /> 
         //  </Modal>
-           // }   
+           // }  
+
+
+
+           {/* //   <div>
+      //   <em>Please do </em>
+      //   <span className="kdb">Sign Up</span> <em>if New User</em>
+      //   <em>or Existing Please do</em> <span className="kdb">Sign In</span>
+      //   <em>for save the History And Placed </em> <b>Name</b>
+      //   <em> on Leader Board</em>
+      // </div> */} 

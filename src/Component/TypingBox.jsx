@@ -1,5 +1,15 @@
-import { Paper } from "@mui/material";
-import React, { createRef, useEffect, useMemo, useRef, useState } from "react";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Paper,
+  Slide,
+} from "@mui/material";
+import * as React from "react";
+
+import { createRef, useEffect, useMemo, useRef, useState } from "react";
 import { useGameMode } from "../Context/GameMood";
 import Uppermenu from "./Uppermenu";
 import Notification from "./Notification";
@@ -23,6 +33,7 @@ function TypingBox() {
   const [extraChar, setExtraChar] = useState(0);
   const [correctWords, setCorrectWords] = useState(0);
   const [graphData, setGraphData] = useState([]);
+  const [openNavigation, setOpenNavigation] = useState(false);
   // const[words,setWords] = useState([]);
   const [intervalId, setIntervalId] = useState(null);
   const [wordsArray, setwordsArray] = useState(() => {
@@ -37,6 +48,7 @@ function TypingBox() {
     return Array(words.length)
       .fill(0)
       .map((ref) => createRef());
+    localStorage.setItem('lastAssignment',JSON.stringify(wordSpanRef));
   }, [words]);
 
   const { gameTime } = useGameMode();
@@ -45,6 +57,49 @@ function TypingBox() {
   // const wordSpanRef =
 
   //function
+
+  const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
+  // export default function AlertDialogSlide() {
+  //   const handleClickOpen = () => {
+  //     setOpen(true);
+  //   };
+  //   const handleClose = () => {
+  //     setOpen(false);
+  //   };
+
+  const resetWordSpanRef=()=>{
+    wordSpanRef.map((node) => {
+      Array.from(node.current.childNodes).map((span) => {
+        span.className = "Charecter";
+      });
+    });
+    if (wordSpanRef[0]) {
+      wordSpanRef[0].current.querySelectorAll("span")[0].className =
+        "Charecter currentCharLeftCursor";
+    }
+  }
+
+  const redoGame = () => {
+    setCurrentWordIndex(0);
+    setCurrentCharecterIndex(0);
+    setCountDown(gameTime);
+    setTestStart(false);
+    setTestOver(false);
+    setCorrectChar(0);
+    setInCorrectChar(0);
+    setCorrectWords(0);
+    setExtraChar(0);
+    setMissedChar(0);
+    setGraphData([]);
+    
+    resetWordSpanRef()
+    clearInterval(intervalId);
+    focusInput();
+    textInputRef.current.value = "";
+  };
+
 
   const resetGame = () => {
     setCurrentWordIndex(0);
@@ -77,8 +132,16 @@ function TypingBox() {
       setCountDown((prevCountDown) => {
         setCorrectChar((correctChar) => {
           setGraphData((data) => {
-            console.log(data, "---");
-            return [...data,[gameTime - prevCountDown,Math.round(correctChar / 5 / ((gameTime - prevCountDown + 1) / 60))]];
+
+            return [
+              ...data,
+              [
+                gameTime - prevCountDown,
+                Math.round(
+                  correctChar / 5 / ((gameTime - prevCountDown + 1) / 60)
+                ),
+              ],
+            ];
           });
           return correctChar;
         });
@@ -100,24 +163,87 @@ function TypingBox() {
   };
 
   const calculateAccuracy = () => {
+    if(correctWords===0 || currentWordIndex===0){
+      return 0;
+    }
     return Math.round((correctWords / currentWordIndex) * 100);
   };
 
+  const handleDialogEvent = (e) => {
+    
+    if(e.keyCode === 13 || e.keyCode===9){
+      e.preventDefault();
+      setOpenNavigation(false);
+      resetGame();
+      return;   
+  }
+  if(e.keyCode===32){
+      e.preventDefault();
+      setOpenNavigation(false);
+      redoGame();
+      return;
+  }
+  e.preventDefault();
+  setOpenNavigation(false);
+  focusInput();
+  startTimer();
+  };
+
+  const handleClose = () => {
+    setOpenNavigation(false);
+  };
+
   const handlerKeyDown = (e) => {
-    if (!testStart) {
-      startTimer();
-      setTestStart(true);
-    }
+    if(e.keyCode===9){
 
+      if(testStart){
+          clearInterval(intervalId);
+      }
+      e.preventDefault();
+      setOpenNavigation(true);
+      return;
+  }
+  setcapsLocked(e.getModifierState("CapsLock"));
+  if (!testStart) {
+    startTimer();
+    setTestStart(true);
+  }
+
+  let allSpans =wordSpanRef[currentWordIndex].current.querySelectorAll("span");
+
+    // if(testOver){
+    //   if(e.keyCode === 9){
+    //     clearInterval(intervalId)
+    //     e.preventDefault();
+    //     setOpenNavigation(true);
+    //     return;
+    //   }
+     
+
+    // }else{
+    // if (e.keyCode === 9) {
+    //   if(!testOver && testStart){
+    //     clearInterval(intervalId)
+    //   }
+    //   e.preventDefault();
+    //   setOpenNavigation(true);
+    //   return;
+    // }
+
+    
+    
     let key = e.key;
-
-    setcapsLocked(e.getModifierState("CapsLock"));
+    
     //current word refference
-    let allSpans =
-      wordSpanRef[currentWordIndex].current.querySelectorAll("span");
-
+    
     // //space click --------------------------> next word
     if (e.keyCode === 32) {
+
+      if(currentWordIndex===wordsArray.length-1){
+        clearInterval(intervalId);
+        setTestOver(true);  
+        return;   
+    }
       const correctChar =
         wordSpanRef[currentWordIndex].current.querySelectorAll(".correctChar");
       const incorrectChar =
@@ -222,10 +348,7 @@ function TypingBox() {
     }
 
     // Cursor position setting ===========>
-    if (
-      currentCharecterIndex + 1 ===
-      wordSpanRef[currentWordIndex].current.querySelectorAll("span").length
-    ) {
+    if (currentCharecterIndex + 1 ===wordSpanRef[currentWordIndex].current.querySelectorAll("span").length) {
       wordSpanRef[currentWordIndex].current.querySelectorAll("span")[
         currentCharecterIndex
       ].className += " currentCharRightCursor";
@@ -236,7 +359,8 @@ function TypingBox() {
     }
 
     setCurrentCharecterIndex(currentCharecterIndex + 1);
-  };
+  }
+ 
   const handlerKeyUp = (e) => {};
 
   useEffect(() => {
@@ -254,15 +378,7 @@ function TypingBox() {
   }, [gameTime]);
 
   useEffect(() => {
-    wordSpanRef.map((node) => {
-      Array.from(node.current.childNodes).map((span) => {
-        span.className = "Charecter";
-      });
-    });
-    if (wordSpanRef[0]) {
-      wordSpanRef[0].current.querySelectorAll("span")[0].className =
-        "Charecter currentCharLeftCursor";
-    }
+    resetWordSpanRef()
   }, [wordSpanRef]);
 
   // console.log("--------------------------------------------------------------------------------------")
@@ -278,7 +394,6 @@ function TypingBox() {
           width: "80%",
           margin: "10px auto",
           padding: "10px 20px",
-          
         }}
       >
         <Uppermenu countDown={countDown} />
@@ -319,6 +434,32 @@ function TypingBox() {
           ref={textInputRef}
         />
       </Paper>
+
+     
+        <Dialog
+          open={openNavigation}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={handleClose}
+          onKeyDown={handleDialogEvent}
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle>{"User Navigation"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              Press <span className="kdb">Space</span> Redo The Game{" "}
+            </DialogContentText>
+            <DialogContentText id="alert-dialog-slide-description">
+              Press <span className="kdb">Enter</span>/<span className="kdb">Tab</span> Restart The Game
+            </DialogContentText>
+            <DialogContentText id="alert-dialog-slide-description">
+              Press any <span className="kdb">Esc</span>/
+              <span className="kdb">Click</span>/any other <span className="kdb">Key</span> Outside Exit Navigation
+            </DialogContentText>
+          </DialogContent>
+        </Dialog>
+     
+      
     </>
   );
 }

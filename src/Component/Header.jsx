@@ -29,34 +29,33 @@ const style = {
 
 
 
-function ResponsiveAppBar() {
+function Header({parentCallback}) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const[signInModal,setSignInModal]=useState(false);
   const[signUpModal,setSignUpModal]=useState(false);
-  const[val,setVal]=useState(0);
   const navigate = useNavigate();
-  // const[menuSetting,setMenuSetting]=useState(['SignUp','SignIn', 'Dashboard', 'Logout'])
-
-
-const[user] = useAuthState(auth);
-
-useEffect(()=>{
-  if(user){
-    settings.pop();
-    settings.pop();
-    settings.push('Dashboard');
-    settings.push('Logout');
-  }else{
-    settings.pop();
-    settings.pop();
-    settings.push('SignIn');
-    settings.push('SignUp');
-  }
-},[user])
-
-
-
+  
+  
+  const[user] = useAuthState(auth);
+  
+  useEffect(()=>{
+    if(user){
+      settings.pop();
+      settings.pop();
+      settings.push('Dashboard');
+      settings.push('Logout');
+    }else{
+      settings.pop();
+      settings.pop();
+      settings.push('SignIn');
+      settings.push('SignUp');
+    }
+  },[user])
+  
+  
+ 
+  
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -228,4 +227,4 @@ useEffect(()=>{
     </React.Fragment>
   );
 }
-export default ResponsiveAppBar;
+export default Header;

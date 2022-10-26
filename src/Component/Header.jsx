@@ -8,7 +8,8 @@ import SigninForm from './SigninForm';
 import {auth } from '../firebaseConfig'
 import {useAuthState} from 'react-firebase-hooks/auth'
 import { useNavigate } from 'react-router-dom';
-
+import GoogleButton from 'react-google-button';
+import PersonIcon from '@mui/icons-material/Person';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['SignUp','SignIn'] ;
@@ -35,6 +36,7 @@ function Header({parentCallback}) {
   const[signInModal,setSignInModal]=useState(false);
   const[signUpModal,setSignUpModal]=useState(false);
   const navigate = useNavigate();
+
   
   
   const[user] = useAuthState(auth);
@@ -84,6 +86,7 @@ function Header({parentCallback}) {
     }
     if(e.target.innerText==="Logout"){
       auth.signOut();
+      navigate("/");
     }
   };
 
@@ -170,7 +173,7 @@ function Header({parentCallback}) {
               textDecoration: 'none',
             }}
           >
-            Hi
+            TypeTest
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -187,7 +190,13 @@ function Header({parentCallback}) {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Soubhik" src="/static/images/avatar/2.jpg" />
+                {user? <Avatar alt={user.displayName?user.displayName:user.email} 
+                src={user.photoURL?user.photoURL:user.email.charAt(0)}/>:
+                <Avatar>
+  <PersonIcon />
+</Avatar>
+                }
+               
               </IconButton>
             </Tooltip>
             <Menu
@@ -222,6 +231,8 @@ function Header({parentCallback}) {
 
 {signInModal &&<SigninForm open={signInModal}
       onModalClose={onModalClose} sx={style}  />}
+
+      
 
 
     </React.Fragment>

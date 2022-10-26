@@ -9,6 +9,7 @@ function Homepage() {
         display:"flex", 
         flexDirection:"column",
         minHeight:"100%",
+        width:"100%"
       }}>
         <Paper
           elevation={3}

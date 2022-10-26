@@ -28,11 +28,15 @@ function Stats({
         // console.log(accuracy.isNaN(),accuracy,"sdsdsdss");
         if(!isNaN(accuracy)){
             await resultsRef.add({
-                userId: uid,
-                wpm: wpm,
-                accuracy: accuracy,
-                characters: `${correctChars}/${incorrectChars}/${extraChars}/${missedChars}`,
-                timeStamp: new Date()
+              userId: uid,
+              date:(new Date()).toString().split(' ').splice(1,3).join(' '),
+              time:new Date().toLocaleTimeString(),
+              wpm: wpm,
+              accuracy: accuracy,
+              correctChars:`${correctChars}`,
+              incorrectChars:`${incorrectChars}`,
+              extraChars:`${extraChars}`,
+              missedChars:`${missedChars}`,
             });
         }
         // else{

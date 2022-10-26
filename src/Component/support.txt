@@ -27,3 +27,52 @@
       //   <em>for save the History And Placed </em> <b>Name</b>
       //   <em> on Leader Board</em>
       // </div> */} 
+
+
+
+
+       {
+                        data: correctData.map(i=>i[1]),
+                        label: "correct Data",
+                        borderColor: "blue"
+                    },
+                    {
+                        data: incorrectData.map(i=>i[1]),
+                        label: "incorrect Data",
+                        borderColor: "red"
+                    },
+
+
+                    setCorrectData((correctChar)=>{
+            return [
+              ...correctChar,
+              [gameTime - prevCountDown,
+                correctChar ,
+              ],
+            ];
+          })
+
+
+          setInCorrectChar((incorrectChar) => {
+        
+          setCorrectData((incorrectChar)=>{
+            return [
+              ...incorrectChar,
+              [gameTime - prevCountDown,
+                incorrectChar ,
+              ],
+            ];
+          })
+          return incorrectChar;
+
+
+
+             date:(new Date()).toString().split(' ').splice(1,3).join(' '),
+        time:new Date().toLocaleTimeString(),
+
+
+ <Button variant="contained" className={reset} onClick={reset} endIcon={<RestartAltIcon />}>
+            Reset
+          </Button>
+
+          

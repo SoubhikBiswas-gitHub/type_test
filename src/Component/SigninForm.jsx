@@ -1,5 +1,7 @@
 import { Box, Button, TextField,Modal } from '@mui/material'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import React, { useState } from 'react'
+import GoogleButton from 'react-google-button';
 // import { useAlert } from '../Context/AlertContext';
 // import { useTheme } from '../Context/ThemeContext';
 import { auth } from '../firebaseConfig';
@@ -10,7 +12,16 @@ const SigninForm = ({open,onModalClose,sx}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     // const {setAlert} = useAlert();
-
+    const googleProvider=new GoogleAuthProvider();
+const signInWithGoogle=()=>{
+    signInWithPopup(auth,googleProvider).then((res)=>{
+        onModalClose();
+        alert("login done")
+    }).catch((value) => {
+        onModalClose();
+        alert("Error to LogIn")
+    })
+}
     const handleSubmit = () =>{
         if(!email || !password){
             // setAlert({
@@ -122,8 +133,9 @@ const SigninForm = ({open,onModalClose,sx}) => {
         // style={{backgroundColor:theme.title, color:theme.background}}
         onClick = {handleSubmit}>
             Sign in
-        </Button>
-
+        </Button>  
+    <span>Or</span>
+    <GoogleButton onClick={signInWithGoogle}/>
     </Box>
     </Modal>
   )

@@ -1,6 +1,9 @@
 import { Box, Button, TextField,Modal } from "@mui/material";
 import React, { useState } from "react";
+import GoogleButton from "react-google-button";
 import {auth} from '../firebaseConfig'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+
 
 function SignUpForm({open,onModalClose,sx}) {
     const[email,setEmail] =useState("");
@@ -9,7 +12,16 @@ function SignUpForm({open,onModalClose,sx}) {
 
 
    
-
+    const googleProvider=new GoogleAuthProvider();
+    const signInWithGoogle=()=>{
+        signInWithPopup(auth,googleProvider).then((res)=>{
+            onModalClose();
+            alert("login done")
+        }).catch((value) => {
+            onModalClose();
+            alert("Error to LogIn")
+        })
+      }
     
 
     const handleSubmit =()=>{
@@ -155,6 +167,8 @@ function SignUpForm({open,onModalClose,sx}) {
       >
         Sign Up
       </Button>
+      <span>Or</span>
+    <GoogleButton label='Sign up with Google' onClick={signInWithGoogle}/>
     </Box>
     </Modal>
   );

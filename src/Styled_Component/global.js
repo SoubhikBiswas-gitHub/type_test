@@ -164,7 +164,7 @@ color : green;
     color:white;
     font-size:.8rem;
     font-weight:700;
-    boxShadow:"  0px 1px 10px 0px rgba(51, 50, 50, 0.5)"
+    box-shadow:  0px 1px 10px 0px rgba(51, 50, 50, 0.5)
 }
 
 b{
@@ -175,4 +175,37 @@ color:white;
     // text-decoration: overline;
 }
 
+.userStat{
+    background-color:grey;
+    border: 1px solid black;
+    padding:5px;
+    color:wheat;
+    border-radius:5px;
+    box-shadow:  0px 1px 10px 0px rgba(51, 50, 50, 0.5);
+    text-align:center;
+    font-size:1rem;
+    display: flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.user-result{
+    color:goldenrod;
+    font-size:1.5rem;
+    font-weight:700;
+}
+
+.user-profile{
+    background-color:grey;
+    padding:5px;
+    color:goldenrod;
+    border-radius:5px;
+    box-shadow:  0px 1px 10px 0px rgba(51, 50, 50, 0.5);
+    text-align:left;
+    font-size:1rem;
+    border: 1px solid black;
+    background-image:url("https://source.unsplash.com/random/1200×300/?Experimental");
+
+
+}
 `;

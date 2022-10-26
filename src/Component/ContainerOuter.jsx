@@ -39,7 +39,7 @@ function ContainerOuter() {
         <Paper
           elevation={3}
           sx={{
-            height: "100VHvh",
+           
             paddingTop: "1rem",
             paddingBottom: "1rem",
             display: "flex",

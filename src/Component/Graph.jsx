@@ -22,31 +22,66 @@ ChartJS.register(
     Legend
 );
 
-const Graph = ({graphData}) => {
-// console.log(graphData)
-    // const {theme} = useTheme();
+const Graph = ({graphData,correctCharData,incorrectCharData,missedCharData,extraCharData,type}) => {
 
-    // [[0,0],[0,0]]
-
-  return (
-    <div>
+    if((correctCharData===undefined) && (incorrectCharData===undefined) && (missedCharData===undefined) && (extraCharData===undefined)){
+        return (<div>
+            
+            <Line 
+    
+            data={
+                {
+                    labels: graphData.map(i=>(type==='date')?(""):(i[0]+1))   ,
+                    datasets: [
+                        {
+                            data: graphData.map(i=>i[1]),
+                            label: "wpm",
+                            borderColor: "gold"
+                        }
+                    ]
+                }
+            }   />
+        </div>)
+    }else{
+        return(
+<div>
         <Line 
 
         data={
             {
-                // labels: graphData.map(i=>(type==='date')?(""):(i[0]+1))   ,
-                labels: graphData.map(i=>(i[0]+1)),
+                labels: graphData.map(i=>(type==='date')?(""):(i[0]+1))   ,
                 datasets: [
                     {
                         data: graphData.map(i=>i[1]),
                         label: "wpm",
                         borderColor: "gold"
+                    },
+                    {
+                        data: correctCharData.map(i=>i[1]),
+                        label: "Correct Character",
+                        borderColor: "green"
+                    },
+                    {
+                        data: incorrectCharData.map(i=>i[1]),
+                        label: "Incorrect Character",
+                        borderColor: "red"
+                    },
+                    {
+                        data: missedCharData.map(i=>i[1]),
+                        label: "Missed Character",
+                        borderColor: "cyan"
+                    },
+                    {
+                        data: extraCharData.map(i=>i[1]),
+                        label: "Extra Character",
+                        borderColor: "violet"
                     }
                 ]
             }
         }   />
-    </div>
-  )
+    </div>)
+       
+}
 }
 
 export default Graph

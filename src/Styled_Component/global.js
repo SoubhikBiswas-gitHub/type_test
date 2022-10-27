@@ -221,5 +221,11 @@ color:white;
 .blur{
     filter: blur(5px);
  }
+ #focusWarning{
+    height:100px;
+    display:none!important;
+ }
+ 
+ 
 }
 `;

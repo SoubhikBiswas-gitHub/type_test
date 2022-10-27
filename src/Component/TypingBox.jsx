@@ -8,6 +8,7 @@ import {
   Slide,
 } from "@mui/material";
 import HighlightAltIcon from '@mui/icons-material/HighlightAlt';
+import img from '../Styled_Component/img/redo.png'
 import * as React from "react";
 // import { Dialog, DialogTitle } from '@material-ui/core';
 import { random, set } from 'lodash';
@@ -147,16 +148,17 @@ function TypingBox() {
       setCountDown((prevCountDown) => {
         setCorrectChar((correctChar) => {
           setGraphData((data) => {
-
-            return [
-              ...data,
-              [
-                gameTime - prevCountDown,
-                Math.round(
-                  correctChar / 5 / ((gameTime - prevCountDown + 1) / 60)
-                ),
-              ],
-            ];
+            const startTime = (gameMode==='words')?180:gameTime
+            return [...data,[startTime-prevCountDown,Math.round((correctChar/5)/((startTime-prevCountDown+1)/60))]];
+            // return [
+            //   ...data,
+            //   [
+            //     gameTime - prevCountDown,
+            //     Math.round(
+            //       correctChar / 5 / ((gameTime - prevCountDown + 1) / 60)
+            //     ),
+            //   ],
+            // ];
           });
           return correctChar;
         });
@@ -172,18 +174,14 @@ function TypingBox() {
     }
   };
 
+  let blurWarningDiv = document.getElementById("focusWarning");
 const handleInputFocus=()=>{
   wordRefferRef.current.style.filter= "blur(3px)";
-  let acb = document.getElementById("focusWarning") 
-  console.log(acb)
-  acb.innerHTML="<HighlightAltIcon/>"
-  acb.style.removeProperty("filter")
-  acb.style.position("relative")
-  acb.style.position("relative")
   if(testStart){
     clearInterval(intervalId)
   }
-  console.log(acb)
+  blurWarningDiv.style.display="block"
+  
 }
 
 const handleInputInFocus=()=>{
@@ -191,6 +189,7 @@ const handleInputInFocus=()=>{
   if(testStart){
     startTimer()
   }
+  blurWarningDiv.style.display="none"
 }
 
   const calculateWPM = () => {
@@ -437,7 +436,10 @@ const handleInputInFocus=()=>{
         {!testOver ? (
           <div className="type-box"  onClick={focusInput} >
             <Uppermenu countDown={countDown} />
-                      <div id="focusWarning"></div>
+                      <div id="focusWarning" style={{width:"100%",display:"none",position:"absolute",top:"50%",left:"0"}}> 
+                       
+                          <div style={{fontSize:"1.5rem",display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"}}>Click Here To Start  <img style={{ display:"block",height:"50px"}} src={img} alt="" /></div>
+                      </div>
             <div className="words" ref={wordRefferRef}>
               {words.map((word, pIndx) => (
                 <span key={pIndx} className="word" ref={wordSpanRef[pIndx]}>

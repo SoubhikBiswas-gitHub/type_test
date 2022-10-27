@@ -112,7 +112,7 @@ const signInWithGoogle=()=>{
         display:"flex",
         flexDirection:"column",
         gap:"20px",
-        backgroundColor:theme.box
+        // backgroundColor:theme.box
      }}>
         <TextField
         variant="outlined"
@@ -120,11 +120,11 @@ const signInWithGoogle=()=>{
         label="Enter email"
         InputLabelProps={{
             style: {
-                color: theme.title
+                color: theme.text1
             } }}
         InputProps={{
             style:{
-                color:theme.title,
+                color:theme.text2,
             }
         }
         }
@@ -138,11 +138,11 @@ const signInWithGoogle=()=>{
         label="Enter Password"
         InputLabelProps={{
             style: {
-                color: theme.title
+                color: theme.text1
             } }}
         InputProps={{
             style:{
-                color: theme.title,
+                color: theme.text2,
             }
         }
         }
@@ -151,13 +151,13 @@ const signInWithGoogle=()=>{
         <Button
         variant="contained"
         size="large"
-        style={{backgroundColor:theme.title, color:theme.background}}
+        style={{backgroundColor:theme.textbg2, color:theme.text2}}
         onClick = {handleSubmit}>
             Sign in
         </Button>  
 
         <Box sx={{display:"flex",justifyContent:"center",flexDirection:"column"}} >
-     <div style={{ textAlign:"center"}}>Or</div>
+     <div style={{ textAlign:"center",color:theme.header_footer_text}}>Or</div>
       <GoogleButton style={{margin:"auto"}} label='Sign up with Google' onClick={signInWithGoogle}/>
      </Box>
     

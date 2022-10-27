@@ -1,8 +1,11 @@
 import React from 'react'
 import { Paper } from '@mui/material'
 import { useGameMode } from '../Context/GameMood';
+import { useTheme } from '../Context/ThemeContext';
 
 function Uppermenu({countDown}) {
+
+  const{theme}=useTheme();
 
   const {setGameTime, setGameMode, gameMode, setGameWords} = useGameMode();
 
@@ -20,7 +23,7 @@ function Uppermenu({countDown}) {
 
   return (
     <div style={{width:"100%",padding:"10px 0" }}>
-        <Paper sx={{width:"100%",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+        <Paper sx={{width:"100%",display:"flex",justifyContent:"space-between",alignItems:"center",backgroundColor:theme.textbg2}}>
         {gameMode==='time'?(<h2 className="timer">{countDown}s</h2>):(<></>)}
       
       

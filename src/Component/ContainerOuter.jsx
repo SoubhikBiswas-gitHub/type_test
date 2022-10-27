@@ -26,7 +26,7 @@ function ContainerOuter() {
   // const theme =React.useContext(ThemeContext)
 
 
-  
+
 
   // console.log(theme);
   return (
@@ -35,7 +35,7 @@ function ContainerOuter() {
       
       <Container
         maxWidth="xl"
-        sx={{ backgroundColor: "yellow", padding: ".5rem 0",display:"flex",alignItems:"center",justifyContent:"center" }}
+        sx={{ backgroundColor: theme.mainbg, padding: ".5rem 0",display:"flex",alignItems:"center",justifyContent:"center" }}
       >
         
         <Paper
@@ -48,7 +48,7 @@ function ContainerOuter() {
             flexDirection: "column",
             alignitems: "center",
             justifyContent: "center",
-            backgroundColor: `${theme.background}`,
+            backgroundColor: `${theme.mainbg2}`,
 
           }}
         >

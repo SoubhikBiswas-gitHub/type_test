@@ -1,9 +1,34 @@
 import { Box,Paper } from '@mui/material'
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import TypingBox from '../Component/TypingBox'
 import UserMsgDisplay from '../Component/UserMsgDisplay'
+import { useTheme } from '../Context/ThemeContext'
 
 function Homepage() {
+
+const[quotetext,setQuotetext]=useState({})
+
+const fetchAdvice = () => {
+  axios.get('https://api.adviceslip.com/advice')
+  .then((response) =>  {
+      const { advice } = response.data.slip;
+
+      setQuotetext({ advice });
+  })
+
+  .catch ((error) => {
+      console.log(error);
+  })
+}
+
+    const {theme}= useTheme()  
+
+
+  useEffect(()=>{
+    fetchAdvice();
+  },[])
+
   return (
     <Box sx={{
         display:"flex", 
@@ -21,11 +46,11 @@ function Homepage() {
             width: "80%",
             margin: "10px auto",
             padding: "10px",
+            backgroundColor:theme.mainbg
           }}
         >
-          <div className="moti-header">Motivation</div>
-          <div className="moti-text">Motivation</div>
-          <div className="moti-by">Motivation</div>
+          <div style={{fontSize:"1.3rem",fontWeight:"700",color:theme.mainbg2,textAlign:"center" }}> <q>{quotetext.advice}</q></div>
+         
         </Paper>
 
         <TypingBox />

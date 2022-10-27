@@ -38,7 +38,8 @@ const Graph = ({graphData,correctCharData,incorrectCharData,missedCharData,extra
                         {
                             data: graphData.map(i=>i[1]),
                             label: "wpm",
-                            borderColor: theme.stats
+                            borderColor: theme.wpm,
+                            backgroundColor:theme.mainbg
                         }
                     ]
                 }
@@ -56,27 +57,32 @@ const Graph = ({graphData,correctCharData,incorrectCharData,missedCharData,extra
                     {
                         data: graphData.map(i=>i[1]),
                         label: "wpm",
-                        borderColor: theme.stats
+                        borderColor: theme.wpm,
+                        backgroundColor:theme.mainbg
                     },
                     {
                         data: correctCharData.map(i=>i[1]),
                         label: "Correct Character",
-                        borderColor: "green"
+                        borderColor: theme.correct,
+                        backgroundColor:theme.mainbg
                     },
                     {
                         data: incorrectCharData.map(i=>i[1]),
                         label: "Incorrect Character",
-                        borderColor: "red"
+                        borderColor: theme.incorrect,
+                        backgroundColor:theme.mainbg
                     },
                     {
                         data: missedCharData.map(i=>i[1]),
                         label: "Missed Character",
-                        borderColor: "cyan"
+                        borderColor: theme.missed,
+                        backgroundColor:theme.mainbg
                     },
                     {
                         data: extraCharData.map(i=>i[1]),
                         label: "Extra Character",
-                        borderColor: "violet"
+                        borderColor: theme.extra,
+                        backgroundColor:theme.mainbg
                     }
                 ]
             }

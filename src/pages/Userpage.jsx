@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { deepOrange, deepPurple } from "@mui/material/colors";
 import TableCOmponent from "../Component/TableCOmponent";
 import TableComponentSort from "../Component/TableComponentSort";
+import { useTheme } from "../Context/ThemeContext";
 
 function Userpage() {
   const [data, setData] = useState([]);
@@ -113,7 +114,7 @@ let MAxValExtraCharacter=findMax(MaxextraCharData);
 let MAxValAccuracy=findMax(MaxAccuracyData);
 
  
-  
+  const {theme}= useTheme()
 
   useEffect(() => {
     if (!user) {
@@ -165,6 +166,9 @@ let MAxValAccuracy=findMax(MaxAccuracyData);
           margin: "10px auto",
           display: "flex",
           flexDirection: "column",
+        backgroundColor:theme.mainbg,
+
+          
         }}
       >
         <Stack direction="row" spacing={3} sx={{ padding: "2px" ,width:"100%" }}>
@@ -276,6 +280,8 @@ let MAxValAccuracy=findMax(MaxAccuracyData);
           margin: "10px auto",
           display: "flex",
           flexDirection: "column",
+        backgroundColor:theme.mainbg
+
         }}
       >
         <TableComponentSort columns={columns} rows={data} />

@@ -4,6 +4,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import TableComponentSort from "../Component/TableComponentSort";
+import { useTheme } from "../Context/ThemeContext";
 import { auth, db } from "../firebaseConfig";
 
 function LeaderBoard() {
@@ -12,6 +13,8 @@ function LeaderBoard() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const{theme}=useTheme()
 
   const [data, setData] = React.useState([]);
 
@@ -57,8 +60,8 @@ function LeaderBoard() {
   }
   return (
     <Box sx={{ width: "100%" }}>
-     <Paper sx={{backgroundColor:"white" ,margin:"5px 10px"}}>
-      <AppBar position="static" style={{ backgroundColor: "white" }}>
+     <Paper sx={{backgroundColor:theme.typeBox ,margin:"5px 10px"}}>
+      <AppBar position="static" style={{ backgroundColor: theme.textbg2,color:theme.mainbg }}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -80,7 +83,7 @@ function LeaderBoard() {
         </Tabs>
       </AppBar>
       </Paper>
-      <Paper sx={{backgroundColor:"white" ,margin:"5px 10px",marginTop:0}}>
+      <Paper sx={{backgroundColor:theme.text2 ,margin:"5px 10px",marginTop:0}}>
       {value === 0 && <TableComponentSort columns={columns} rows={data} initialState={initialState}/>}
       {value === 1 && <TableComponentSort columns={columns} rows={data} />}
       </Paper>

@@ -24,28 +24,33 @@ import { useNavigate } from "react-router-dom";
 import GoogleButton from "react-google-button";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useTheme } from "../Context/ThemeContext";
 
 const pages = ["HOME", "LEADERBOARD", "ABOUT"];
 const settings = ["SignUp", "SignIn"];
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 
 function Header({ parentCallback }) {
+  const {theme} = useTheme();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [signInModal, setSignInModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
   const navigate = useNavigate();
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor:theme.navibg,
+    border: theme.mainbg,
+    color:theme.navitext,
+    boxShadow: 24,
+    p: 4,
+  };
+
 
   const [user] = useAuthState(auth);
 
@@ -117,8 +122,8 @@ function Header({ parentCallback }) {
         <Container
           maxWidth="xl"
           sx={{
-            backgroundColor: "orange",
-            boxShadow: "  0px 1px 10px 0px rgba(51, 50, 50, 0.5)",
+            backgroundColor: theme.textbg2,
+            boxShadow: " 0px 1px 10px 0px rgba(51, 50, 50, 0.5)",
           }}
         >
           <Toolbar disableGutters>

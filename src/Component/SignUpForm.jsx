@@ -134,12 +134,12 @@ function SignUpForm({open,onModalClose,sx}) {
         label="Enter email"
         InputLabelProps={{
           style: {
-            color: theme.title,
+            color: theme.text1,
           },
         }}
         InputProps={{
           style: {
-            color: theme.title,
+            color: theme.text2,
           },
         }}
         onChange={(e) => setEmail(e.target.value)}
@@ -150,12 +150,12 @@ function SignUpForm({open,onModalClose,sx}) {
         label="Enter Password"
         InputLabelProps={{
           style: {
-            color: theme.title,
+            color: theme.text1,
           },
         }}
         InputProps={{
           style: {
-            color: theme.title,
+            color: theme.text2,
           },
         }}
         onChange={(e) => setPassword(e.target.value)}
@@ -166,12 +166,12 @@ function SignUpForm({open,onModalClose,sx}) {
         label="Confirm Password"
         InputLabelProps={{
           style: {
-            color: theme.title,
+            color: theme.text1,
           },
         }}
         InputProps={{
           style: {
-            color: theme.title,
+            color: theme.text2,
           },
         }}
         onChange={(e) => setConfirmPassword(e.target.value)}
@@ -180,14 +180,14 @@ function SignUpForm({open,onModalClose,sx}) {
       <Button
         variant="contained"
         size="large"
-        style={{ backgroundColor: theme.title, color: theme.background }}
+        style={{ backgroundColor: theme.textbg2, color: theme.text2 }}
         onClick={handleSubmit}
       >
         Sign Up
       </Button>
      
      <Box sx={{display:"flex",justifyContent:"center",flexDirection:"column"}} >
-     <div style={{ textAlign:"center"}}>Or</div>
+     <div style={{ textAlign:"center",color:theme.header_footer_text}}>Or</div>
       <GoogleButton style={{margin:"auto"}} label='Sign up with Google' onClick={signInWithGoogle}/>
      </Box>
      

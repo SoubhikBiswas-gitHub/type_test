@@ -17,9 +17,12 @@ import { useGameMode } from "../Context/GameMood";
 import Uppermenu from "./Uppermenu";
 import Notification from "./Notification";
 import Stats from "./Stats";
+import { useTheme } from "../Context/ThemeContext";
 var randomWords = require("random-words");
 
 function TypingBox() {
+
+  const {theme}=useTheme()
   //variable
   // var totalCharacterCount=
   //state hooks
@@ -180,7 +183,7 @@ const handleInputFocus=()=>{
   if(testStart){
     clearInterval(intervalId)
   }
-  blurWarningDiv.style.display="block"
+  blurWarningDiv.style.display="block";
   
 }
 
@@ -189,7 +192,9 @@ const handleInputInFocus=()=>{
   if(testStart){
     startTimer()
   }
-  blurWarningDiv.style.display="none"
+  if(blurWarningDiv){
+    blurWarningDiv.style.display="none"
+  }
 }
 
   const calculateWPM = () => {
@@ -431,6 +436,7 @@ const handleInputInFocus=()=>{
           width: "80%",
           margin: "10px auto",
           padding: "10px 20px",
+          backgroundColor:theme.mainbg,
         }}
       >
         {!testOver ? (
@@ -438,7 +444,7 @@ const handleInputInFocus=()=>{
             <Uppermenu countDown={countDown} />
                       <div id="focusWarning" style={{width:"100%",display:"none",position:"absolute",top:"50%",left:"0"}}> 
                        
-                          <div style={{fontSize:"1.5rem",display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"}}>Click Here To Start  <img style={{ display:"block",height:"50px"}} src={img} alt="" /></div>
+                          <div style={{color:theme.text2,fontSize:"1.5rem",display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"}}>Click Here To Start  <img style={{ display:"block",height:"50px"}} src={img} alt="" /></div>
                       </div>
             <div className="words" ref={wordRefferRef}>
               {words.map((word, pIndx) => (
@@ -468,7 +474,7 @@ const handleInputInFocus=()=>{
 
         <input
           type="text"
-          className="hidden-input"
+          style={{opacity:0}}
           onBlur={handleInputFocus}
           onFocus={handleInputInFocus}
           onKeyDown={(e) => handlerKeyDown(e)}
@@ -485,16 +491,17 @@ const handleInputInFocus=()=>{
           onClose={handleClose}
           onKeyDown={handleDialogEvent}
           aria-describedby="alert-dialog-slide-description"
+          
         >
-          <DialogTitle>{"User Navigation"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-slide-description">
-              Press <span className="kdb">Space</span> Redo The Game{" "}
+          <DialogTitle sx={{color:theme.mainbg,backgroundColor:theme.typeBox}}>User Navigation</DialogTitle>
+          <DialogContent sx={{backgroundColor: theme.mainbg2}}>
+            <DialogContentText id="alert-dialog-slide-description" sx={{margin:"20px",color: theme.text1}}>
+              Press <span className="kdb">Space</span> Redo The Game
             </DialogContentText>
-            <DialogContentText id="alert-dialog-slide-description">
+            <DialogContentText id="alert-dialog-slide-description" sx={{margin:"20px",color: theme.text1}}>
               Press <span className="kdb">Enter</span>/<span className="kdb">Tab</span> Restart The Game
             </DialogContentText>
-            <DialogContentText id="alert-dialog-slide-description">
+            <DialogContentText id="alert-dialog-slide-description" sx={{margin:"20px",color: theme.text1}}>
               Press any <span className="kdb">Esc</span>/
               <span className="kdb">Click</span>/any other <span className="kdb">Key</span> Outside Exit Navigation
             </DialogContentText>

@@ -207,5 +207,15 @@ color:white;
     background-image:url("https://source.unsplash.com/random/1200×300/?Experimental");
 
 
+
+.ul {
+	width:100px;
+    list-style-position: outside;
+}
+.ol {
+	width:100px;
+    list-style-position: outside;
+}
+
 }
 `;

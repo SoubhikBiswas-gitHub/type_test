@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 import { useState } from "react";
 import { ThemeContextProvider } from "./Context/ThemeContext";
 import { BrowserRouter } from "react-router-dom";
+import AlertSnackbar from "./Component/Alert";
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
     // <ThemeProvider theme={theme}>
 
     <ThemeContextProvider>
+       <AlertSnackbar/>
       <div className="canvas">
         <BrowserRouter>
           <ContainerOuter />

@@ -29,6 +29,7 @@ function Stats({
         if(!isNaN(accuracy)){
             await resultsRef.add({
               userId: uid,
+              name:user.displayName?user.displayName:user.email,
               date:(new Date()).toString().split(' ').splice(1,3).join(' '),
               time:new Date().toLocaleTimeString(),
               wpm: wpm,

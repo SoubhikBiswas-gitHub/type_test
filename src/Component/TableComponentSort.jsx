@@ -3,7 +3,7 @@ import { DataGrid } from '@mui/x-data-grid';
 
 
 
-export default function TableComponentSort({columns,rows}) {
+export default function TableComponentSort({columns,rows,initialState}) {
 
     var timeSet = new Set();
   const newGraph = rows.filter((i) => {
@@ -13,15 +13,31 @@ export default function TableComponentSort({columns,rows}) {
     }
   });
 
-
+ 
   return (
     <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={newGraph}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-      />
+      {initialState?( <DataGrid
+    rows={newGraph}
+    columns={columns}
+    pageSize={5}
+    rowsPerPageOptions={[5]}
+    
+  />):(<DataGrid
+    rows={newGraph}
+    columns={columns}
+    pageSize={5}
+    rowsPerPageOptions={[5]}
+    initialState={{
+      sorting: {
+        sortModel: [
+          {
+            field: 'wpm',
+            sort: 'desc',
+          },
+        ],
+      },
+    }}
+  />)}
     </div>
   );
 }

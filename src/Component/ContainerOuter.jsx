@@ -10,6 +10,8 @@ import UserMsgDisplay from "./UserMsgDisplay";
 import { Route, Routes } from "react-router-dom";
 import Homepage from '../pages/Homepage'
 import Userpage from "../pages/Userpage";
+import About from "../pages/About";
+import LeaderBoard from "../pages/LeaderBoard";
 // var randomWords = require("random-words");
 // import { useContext } from '../Context/ThemeContext';
 
@@ -55,6 +57,8 @@ function ContainerOuter() {
           <Routes>
             <Route path="/" exact element={<Homepage />}/>
             <Route path="/user" element={<Userpage/>}/>
+            <Route path="/about" element={<About/>}/>
+            <Route path="/leaderboard" element={<LeaderBoard/>}/>
           </Routes>
           
           <Footer />

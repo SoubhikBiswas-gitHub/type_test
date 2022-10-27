@@ -20,9 +20,10 @@ function Userpage() {
   const [extraCharData, setExtraCharData] = useState([]);
   const [MaxWPMData, setMaxWPMData] = useState([]);
   const [MaxcorrectCharData, setMaxCorrectCharData] = useState([]);
-  const [MaxincorrectCharData, MaxsetIncorrectCharData] = useState([]);
+  const [MaxincorrectCharData, setMaxIncorrectCharData] = useState([]);
   const [MaxmissedCharData, setMaxMissedCharData] = useState([]);
   const [MaxextraCharData, setMaxExtraCharData] = useState([]);
+  const [MaxAccuracyData, setMaxAccuracyData] = useState([]);
   const [user, loading] = useAuthState(auth);
   const [dataLoading, setDataLoading] = useState(true);
   const [joinedAt, setJoinedAt] = useState();
@@ -47,6 +48,7 @@ function Userpage() {
       let Maxicdata = [];
       let MaxMdata = [];
       let MaxEdata = [];
+      let MaxAccuracydata = [];
       
       var i=1;
       resultRef
@@ -68,6 +70,7 @@ function Userpage() {
             MaxMdata.push(doc.data().missedChars)
             edata.push([doc.data().date, doc.data().extraChars]);
             MaxEdata.push(doc.data().extraChars)
+            MaxAccuracydata.push(doc.data().accuracy)
           });
 //           let i=1;
 // var rowsData=tempData.map((obj)=>{
@@ -84,15 +87,16 @@ console.log(tempData)
           setDataLoading(false);
           setMaxWPMData(MaxWPMData)
           setMaxCorrectCharData(Maxcdata)
-          setIncorrectCharData(Maxicdata)
-          setMaxMissedCharData(edata)
+          setMaxIncorrectCharData(Maxicdata)
+          setMaxMissedCharData(MaxMdata)
           setMaxExtraCharData(MaxEdata)
+          setMaxAccuracyData(MaxAccuracydata)
         });
     }
   };
 
   const findMax =(arr)=>{
-    let val=Number.MIN_VALUE;
+    let val=0;
     for(let e of arr){
       if(e>val){
         val=e;
@@ -100,11 +104,13 @@ console.log(tempData)
     }
     return val
    }
-let MaxValWPM =findMax(MaxWPMData)
-let MAxValCorrectCharacter=findMax(MaxcorrectCharData)
-let MAxValIncorrectCharacter=findMax(MaxincorrectCharData)
-let MAxValMissedCharacter=findMax(MaxmissedCharData)
-let MAxValExtraCharacter=findMax(MaxextraCharData)
+
+let MaxValWPM = findMax(MaxWPMData);
+let MAxValCorrectCharacter=findMax(MaxcorrectCharData);
+let MAxValIncorrectCharacter=findMax(MaxincorrectCharData);
+let MAxValMissedCharacter=findMax(MaxmissedCharData);
+let MAxValExtraCharacter=findMax(MaxextraCharData);
+let MAxValAccuracy=findMax(MaxAccuracyData);
 
  
   
@@ -130,14 +136,14 @@ let MAxValExtraCharacter=findMax(MaxextraCharData)
   // const [Date , Time,WPM,Accuracy,correctChars,incorrectChars,extraChars,missedChars]
     const columns = [
       { field: 'id', headerName: 'ID', width: 10 },
-        {field: 'date', headerName: 'Date', width: 90 },
-        {field: 'time', headerName: 'Time', width: 90 },
-        {field: 'accuracy', headerName: 'Accuracy', width: 80 },
-        {field: 'wpm', headerName: 'WPM', width: 80 },
-        {field: 'correctChars', headerName: 'Correct Character', width: 80 },
-        {field: 'incorrectChars', headerName: 'Incorrect Character', width: 80 },
-        {field: 'missedChars', headerName: 'Missed Character', width: 80 },
-        {field: 'extraChars', headerName: 'Extra Character', width: 80 }
+        {field: 'date', headerName: 'Date', width: 100 },
+        {field: 'time', headerName: 'Time', width: 100 },
+        {field: 'accuracy', headerName: 'Accuracy', width: 100 },
+        {field: 'wpm', headerName: 'WPM', width: 100 },
+        {field: 'correctChars', headerName: 'Correct Character', width: 130 },
+        {field: 'incorrectChars', headerName: 'Incorrect Character', width: 130 },
+        {field: 'missedChars', headerName: 'Missed Character', width: 130 },
+        {field: 'extraChars', headerName: 'Extra Character', width: 130 }
       ]
 
       
@@ -147,7 +153,6 @@ let MAxValExtraCharacter=findMax(MaxextraCharData)
       sx={{
         display: "flex",
         flexDirection: "column",
-       
         width: "100%",
         padding: "10px 20px",
       }}
@@ -227,8 +232,10 @@ let MAxValExtraCharacter=findMax(MaxextraCharData)
                   Total Test Taken : <div className="user-result">{data.length}</div>
                 </div>
                 <div className="userStat">
-                let MaxValWPM =findMax(MaxWPMData)
                   Highest WPM <div className="user-result">{MaxValWPM}</div>
+                </div>
+                <div className="userStat">
+                  Highest Accuracy <div className="user-result">{MAxValAccuracy}</div>
                 </div>
                 <div className="userStat">
                   Highest Correct Character Type :

@@ -22,17 +22,17 @@ function Footer() {
       <div className="link"></div>
       <div className="note"></div>
       <div className="theme"><Select
- styles={{width:"100px"}}
     value="theme"
     options={themeOptions}
     menuPlacement='top'
     onChange={handleThemeChange}
-    // defaultValue={{label:defaultTheme.label,value:defaultTheme}}
-    // styles={{
-        // control: (styles) => ({...styles,backgroundColor:theme.background, cursor:'pointer', borderColor:theme.title}),
-        // singleValue: (styles) => ({...styles, color:theme.title}),
-        // menu: styles => ({...styles,backgroundColor:theme.background})
-    // }}
+    defaultValue={{label:defaultTheme.label,value:defaultTheme}}
+    styles={{
+      width:"100px",
+        control: (styles) => ({...styles,backgroundColor:theme.background, cursor:'pointer', borderColor:theme.title}),
+        singleValue: (styles) => ({...styles, color:theme.title}),
+        menu: styles => ({...styles,backgroundColor:theme.background})
+    }}
 /></div>
     </Box>
   );

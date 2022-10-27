@@ -37,7 +37,7 @@ function ContainerOuter() {
         maxWidth="xl"
         sx={{ backgroundColor: "yellow", padding: ".5rem 0",display:"flex",alignItems:"center",justifyContent:"center" }}
       >
-        <GlobalStyle />
+        
         <Paper
           elevation={3}
           sx={{

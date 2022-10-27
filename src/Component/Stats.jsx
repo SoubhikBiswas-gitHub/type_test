@@ -3,6 +3,8 @@ import { Paper } from "@mui/material";
 import Graph from "./Graph";
 import { auth, db } from "../firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useAlert } from '../Context/AlertContext';
+
 
 function Stats({
   graphData,
@@ -20,12 +22,11 @@ function Stats({
       return i;
     }
   });
-
+  const {setAlert} = useAlert();
   const [user] = useAuthState(auth);
     const pushStatsToDb = async()=>{
         const resultsRef = db.collection('results');
-        const {uid} = auth.currentUser
-        // console.log(accuracy.isNaN(),accuracy,"sdsdsdss");
+        const {uid} = auth.currentUser;
         if(!isNaN(accuracy)){
             await resultsRef.add({
               userId: uid,
@@ -40,22 +41,23 @@ function Stats({
               missedChars:`${missedChars}`,
             });
         }
-        // else{
+        else{
             
-        //     setAlert({
-        //         open:true,
-        //         type:'error',
-        //         message:'invalid test'
-        //     });
-        //     setTimeout(()=>{
-        //         setAlert({
-        //             open:false,
-        //             type: "",
-        //             message: ""
-        //         })
-        //     },2000);
+            setAlert({
+                open:true,
+                type:'error',
+                message:'Invalid test'
+            });
+            setTimeout(()=>{
+                setAlert({
+                    open:false,
+                    type: "",
+                    message: ""
+                })
+            },2000);
 
         }
+      }
         useEffect(()=>{
           if(user){
               pushStatsToDb();

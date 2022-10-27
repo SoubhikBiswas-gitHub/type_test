@@ -17,7 +17,7 @@ const AlertSnackbar = () => {
             horizontal: "right"
         }}>
             <Slide in={alert.open} timeout={10}>
-                <Alert variant="filled" severity={alert.type}>
+                <Alert variant="filled" severity={alert.type?alert.type:"error"}>
                     {alert.message}
                 </Alert>
             </Slide>

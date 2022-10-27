@@ -2,8 +2,8 @@ import { Box, Button, TextField,Modal } from '@mui/material'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import React, { useState } from 'react'
 import GoogleButton from 'react-google-button';
-// import { useAlert } from '../Context/AlertContext';
-// import { useTheme } from '../Context/ThemeContext';
+import { useAlert } from '../Context/AlertContext';
+import { useTheme } from '../Context/ThemeContext';
 import { auth } from '../firebaseConfig';
 
 const SigninForm = ({open,onModalClose,sx}) => {
@@ -11,69 +11,90 @@ const SigninForm = ({open,onModalClose,sx}) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const {setAlert} = useAlert();
+    const {setAlert} = useAlert();
+    const {theme} = useTheme();
     const googleProvider=new GoogleAuthProvider();
 const signInWithGoogle=()=>{
     signInWithPopup(auth,googleProvider).then((res)=>{
         onModalClose();
-        alert("login done")
+        setAlert({
+            open: true,
+            type: 'success',
+            message: 'Sign In success'
+        });
+        setTimeout(()=>{
+            setAlert({
+                open:false,
+                type: "",
+                message: ""
+            })
+        },2000);
     }).catch((value) => {
         onModalClose();
-        alert("Error to LogIn")
+        setAlert({
+            open: true,
+            type: 'error',
+            message: 'Unable to Sign In'
+        });
+        setTimeout(()=>{
+            setAlert({
+                open:false,
+                type: "",
+                message: ""
+            })
+        },2000);
     })
 }
     const handleSubmit = () =>{
         if(!email || !password){
-            // setAlert({
-            //     open: true,
-            //     type: 'warning',
-            //     message: 'fill all details'
-            // });
-            // setTimeout(()=>{
-            //     setAlert({
-            //         open:false,
-            //         type: "",
-            //         message: ""
-            //     })
-            // },2000);
+            setAlert({
+                open: true,
+                type: 'warning',
+                message: ' Please fill all details'
+            });
+            setTimeout(()=>{
+                setAlert({
+                    open:false,
+                    type: "",
+                    message: ""
+                })
+            },2000);
             return;
         }
 
         auth.signInWithEmailAndPassword(email,password).then((ok)=>{
-            alert("done");
             onModalClose();
-            // setAlert({
-            //     open: true,
-            //     type: 'success',
-            //     message: 'logged in'
-            // });
-            // setTimeout(()=>{
-            //     setAlert({
-            //         open:false,
-            //         type: "",
-            //         message: ""
-            //     })
-            // },2000);
-            // handleClose();
+            setAlert({
+                open: true,
+                type: 'success',
+                message: 'Sign In success'
+            });
+            setTimeout(()=>{
+                setAlert({
+                    open:false,
+                    type: "",
+                    message: ""
+                })
+            },2000);
+            onModalClose();
 
         }).catch((err)=>{
-            console.log(err.code, err.message);
-            // setAlert({
-            //     open: true,
-            //     type: 'error',
-            //     message: 'not able to login'
-            // });
-            // setTimeout(()=>{
-            //     setAlert({
-            //         open:false,
-            //         type: "",
-            //         message: ""
-            //     })
-            // },2000);
+
+            setAlert({
+                open: true,
+                type: 'error',
+                message: 'Unable to Sign In'
+            });
+            setTimeout(()=>{
+                setAlert({
+                    open:false,
+                    type: "",
+                    message: ""
+                })
+            },2000);
         });
     }
 
-    // const {theme} = useTheme();
 
 
   return (
@@ -90,8 +111,8 @@ const signInWithGoogle=()=>{
         padding:10,
         display:"flex",
         flexDirection:"column",
-        gap:"20px"
-        // backgroundColor:"transparent"
+        gap:"20px",
+        backgroundColor:theme.box
      }}>
         <TextField
         variant="outlined"
@@ -99,11 +120,11 @@ const signInWithGoogle=()=>{
         label="Enter email"
         InputLabelProps={{
             style: {
-                color: "balck"//theme.title
+                color: theme.title
             } }}
         InputProps={{
             style:{
-                color:"balck"//theme.title,
+                color:theme.title,
             }
         }
         }
@@ -117,11 +138,11 @@ const signInWithGoogle=()=>{
         label="Enter Password"
         InputLabelProps={{
             style: {
-                color: "balck"//theme.title
+                color: theme.title
             } }}
         InputProps={{
             style:{
-                color: "balck"//theme.title,
+                color: theme.title,
             }
         }
         }
@@ -130,12 +151,16 @@ const signInWithGoogle=()=>{
         <Button
         variant="contained"
         size="large"
-        // style={{backgroundColor:theme.title, color:theme.background}}
+        style={{backgroundColor:theme.title, color:theme.background}}
         onClick = {handleSubmit}>
             Sign in
         </Button>  
-    <span>Or</span>
-    <GoogleButton onClick={signInWithGoogle}/>
+
+        <Box sx={{display:"flex",justifyContent:"center",flexDirection:"column"}} >
+     <div style={{ textAlign:"center"}}>Or</div>
+      <GoogleButton style={{margin:"auto"}} label='Sign up with Google' onClick={signInWithGoogle}/>
+     </Box>
+    
     </Box>
     </Modal>
   )

@@ -7,8 +7,10 @@ import {
   Paper,
   Slide,
 } from "@mui/material";
+import HighlightAltIcon from '@mui/icons-material/HighlightAlt';
 import * as React from "react";
-
+// import { Dialog, DialogTitle } from '@material-ui/core';
+import { random, set } from 'lodash';
 import { createRef, useEffect, useMemo, useRef, useState } from "react";
 import { useGameMode } from "../Context/GameMood";
 import Uppermenu from "./Uppermenu";
@@ -20,6 +22,7 @@ function TypingBox() {
   //variable
   // var totalCharacterCount=
   //state hooks
+  const {gameTime, gameWords, gameMode} = useGameMode();
   const [totalCharacterCount, setTotalCharacterCount] = useState(0);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentCharecterIndex, setCurrentCharecterIndex] = useState(0);
@@ -34,9 +37,13 @@ function TypingBox() {
   const [correctWords, setCorrectWords] = useState(0);
   const [graphData, setGraphData] = useState([]);
   const [openNavigation, setOpenNavigation] = useState(false);
+  const wordRefferRef= useRef()
   // const[words,setWords] = useState([]);
   const [intervalId, setIntervalId] = useState(null);
   const [wordsArray, setwordsArray] = useState(() => {
+    if(gameMode==='words'){
+      return randomWords(gameWords);
+  }
     return randomWords(45);
   });
 
@@ -48,10 +55,9 @@ function TypingBox() {
     return Array(words.length)
       .fill(0)
       .map((ref) => createRef());
-    localStorage.setItem('lastAssignment',JSON.stringify(wordSpanRef));
   }, [words]);
 
-  const { gameTime } = useGameMode();
+  // const { gameTime } = useGameMode();
   const textInputRef = useRef(null);
 
   // const wordSpanRef =
@@ -93,11 +99,10 @@ function TypingBox() {
     setExtraChar(0);
     setMissedChar(0);
     setGraphData([]);
-    
     resetWordSpanRef()
     clearInterval(intervalId);
-    focusInput();
     textInputRef.current.value = "";
+    focusInput();
   };
 
 
@@ -107,6 +112,16 @@ function TypingBox() {
     setCountDown(gameTime);
     setTestStart(false);
     setTestOver(false);
+    clearInterval(intervalId);
+    if(gameMode==='words'){
+      let random = randomWords(Number(gameWords));
+      setwordsArray(random);
+      setCountDown(180);
+  }
+  else{
+      let random = randomWords(50);
+      setwordsArray(random);
+  }
     setCorrectChar(0);
     setInCorrectChar(0);
     setCorrectWords(0);
@@ -114,9 +129,9 @@ function TypingBox() {
     setMissedChar(0);
     setGraphData([]);
     // words=randomWords(50);
-    let random = randomWords(45);
-    setwordsArray(random);
-    clearInterval(intervalId);
+    // let random = randomWords(45);
+    // setwordsArray(random);
+    
     focusInput();
     textInputRef.current.value = "";
   };
@@ -156,6 +171,27 @@ function TypingBox() {
       });
     }
   };
+
+const handleInputFocus=()=>{
+  wordRefferRef.current.style.filter= "blur(3px)";
+  let acb = document.getElementById("focusWarning") 
+  console.log(acb)
+  acb.innerHTML="<HighlightAltIcon/>"
+  acb.style.removeProperty("filter")
+  acb.style.position("relative")
+  acb.style.position("relative")
+  if(testStart){
+    clearInterval(intervalId)
+  }
+  console.log(acb)
+}
+
+const handleInputInFocus=()=>{
+  wordRefferRef.current.style.removeProperty("filter");
+  if(testStart){
+    startTimer()
+  }
+}
 
   const calculateWPM = () => {
     return Math.round(correctChar / 5 / (gameTime / 60));
@@ -373,18 +409,20 @@ function TypingBox() {
     };
   }, []);
 
-  useEffect(() => {
-    resetGame();
-  }, [gameTime]);
 
   useEffect(() => {
     resetWordSpanRef()
   }, [wordSpanRef]);
 
+  useEffect(()=>{
+    resetGame();
+},[gameTime,gameMode,gameWords]);
+
   // console.log("--------------------------------------------------------------------------------------")
   return (
     <>
-      <Notification open={capsLocked} notificationType="Caps Locked" />
+      {/* <Notification open={capsLocked} notificationType="Caps Locked" /> */}
+      <Notification open={capsLocked}/>
       <Paper
         sx={{
           display: "flex",
@@ -396,11 +434,11 @@ function TypingBox() {
           padding: "10px 20px",
         }}
       >
-        <Uppermenu countDown={countDown} />
-
         {!testOver ? (
-          <div className="type-box" onClick={focusInput}>
-            <div className="words">
+          <div className="type-box"  onClick={focusInput} >
+            <Uppermenu countDown={countDown} />
+                      <div id="focusWarning"></div>
+            <div className="words" ref={wordRefferRef}>
               {words.map((word, pIndx) => (
                 <span key={pIndx} className="word" ref={wordSpanRef[pIndx]}>
                   {word.split("").map((letter, cIndx) => (
@@ -429,6 +467,8 @@ function TypingBox() {
         <input
           type="text"
           className="hidden-input"
+          onBlur={handleInputFocus}
+          onFocus={handleInputInFocus}
           onKeyDown={(e) => handlerKeyDown(e)}
           onKeyUp={(e) => handlerKeyUp(e)}
           ref={textInputRef}

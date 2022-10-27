@@ -75,6 +75,7 @@ line-height:1.8rem
     padding:1px 2px;
     margin:1px 1px;
     
+    
 }
 
 .Charecter{
@@ -82,6 +83,7 @@ line-height:1.8rem
     color:#111;
     font-size:1.5rem;
     font-weight:500;
+    
 }
 
 .correctChar{
@@ -216,6 +218,8 @@ color:white;
 	width:100px;
     list-style-position: outside;
 }
-
+.blur{
+    filter: blur(5px);
+ }
 }
 `;

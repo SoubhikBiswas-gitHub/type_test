@@ -10,7 +10,7 @@ import {
     Legend,
   } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-// import {useTheme} from '../Context/ThemeContext';
+import {useTheme} from '../Context/ThemeContext';
 
 ChartJS.register(
     CategoryScale,
@@ -24,6 +24,8 @@ ChartJS.register(
 
 const Graph = ({graphData,correctCharData,incorrectCharData,missedCharData,extraCharData,type}) => {
 
+    const {theme} = useTheme();
+
     if((correctCharData===undefined) && (incorrectCharData===undefined) && (missedCharData===undefined) && (extraCharData===undefined)){
         return (<div>
             
@@ -36,7 +38,7 @@ const Graph = ({graphData,correctCharData,incorrectCharData,missedCharData,extra
                         {
                             data: graphData.map(i=>i[1]),
                             label: "wpm",
-                            borderColor: "gold"
+                            borderColor: theme.stats
                         }
                     ]
                 }
@@ -54,7 +56,7 @@ const Graph = ({graphData,correctCharData,incorrectCharData,missedCharData,extra
                     {
                         data: graphData.map(i=>i[1]),
                         label: "wpm",
-                        borderColor: "gold"
+                        borderColor: theme.stats
                     },
                     {
                         data: correctCharData.map(i=>i[1]),

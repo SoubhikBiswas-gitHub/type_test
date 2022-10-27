@@ -1,25 +1,20 @@
 import "./App.css";
-import ContainerOuter from "./Component/ContainerOuter";
 import { ThemeProvider } from "styled-components";
-import { useState } from "react";
-import { ThemeContextProvider } from "./Context/ThemeContext";
-import { BrowserRouter } from "react-router-dom";
+import { useTheme } from "./Context/ThemeContext";
+import ContainerOuter from "./Component/ContainerOuter";
 import AlertSnackbar from "./Component/Alert";
-
+import { GlobalStyle } from "./Styled_Component/global";
 
 function App() {
+  const { theme } = useTheme();
   return (
-    // <ThemeProvider theme={theme}>
-
-    <ThemeContextProvider>
-       <AlertSnackbar/>
+    <ThemeProvider theme={theme}>
+      <AlertSnackbar />
+      <GlobalStyle />
       <div className="canvas">
-        <BrowserRouter>
           <ContainerOuter />
-        </BrowserRouter>
       </div>
-    </ThemeContextProvider>
-    // </ThemeProvider>
+    </ThemeProvider>
   );
 }
 

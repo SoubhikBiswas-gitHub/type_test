@@ -1,18 +1,25 @@
 import { createContext, useContext, useState } from "react";
 
-const GameMoodContext = createContext();
 
-export const GameMoodContextProvider = ({ children }) => {
-  const [gameTime, setGameTime] = useState(15);
-  const values = {
-    gameTime,
-    setGameTime,
-  };
-  return (
-    <GameMoodContext.Provider value={values}>
-      {children}
-    </GameMoodContext.Provider>
-  );
-};
+const GameModeContext =createContext();
 
-export const useGameMode = () => useContext(GameMoodContext);
+export const GameModeContextProvider = ({children})=>{
+    
+    const [gameMode, setGameMode] = useState('time');  // 'time' , 'word'
+    const [gameTime, setGameTime] = useState(15);
+    const [gameWords, setGameWords] = useState(10);
+
+    const values = {
+        gameTime,
+        gameMode,
+        gameWords,
+        setGameTime,
+        setGameMode,
+        setGameWords
+    }
+
+    return (<GameModeContext.Provider value = {values}>{children}</GameModeContext.Provider>);
+
+}
+
+export const useGameMode = ()=> useContext(GameModeContext);

@@ -43,7 +43,8 @@ const aetherTheme = {
     background: "#101820",
     title: "#EEDAEA",
     typeBoxText: "#CF6BDD",
-    stats: "#EEDAEA"
+    stats: "#EEDAEA",
+    box:"grey"
 }
 
 export const themeOptions = [
